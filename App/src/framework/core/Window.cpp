@@ -67,7 +67,6 @@ std::pair<int, int> Window::getSize() const {
 }
 
 float Window::getAspectRatio() const {
-  using namespace framework;
   auto [width, height] = getSize();
   return as<float>(width) / as<float>(height);
 }
