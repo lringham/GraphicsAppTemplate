@@ -1,3 +1,6 @@
+#define GLFW_INCLUDE_NONE
+#include <GLFW/glfw3.h>
+
 #include "framework/core/App.h"
 #include "framework/graphics/Graphics.h"
 #include "framework/gui/GUI.h"
@@ -11,6 +14,12 @@ class MyApp : public App {
   virtual void initialize() override {
     graphics::setBackgroundColor(0.6, 0.6, 1.0, 1.0);
     gui_.initialize(window_.getNativeHandle());
+  }
+
+  virtual void handleInput() override {
+    if (glfwGetKey(window_.getNativeHandle(), GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+      window_.shouldClose(true);
+    }
   }
 
   virtual void render(float interp) const override {

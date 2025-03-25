@@ -1,12 +1,13 @@
 # Graphics App Template
 A basic app template based on OpenGL, Conan, CMake, and ImGUI. 
 
-## Pre-requisites
+## Linux setup
+### Prerequisites
 ```
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-## Setup
+### setup
 ```
 cd Workspace/App/  
 uv venv && source .venv/bin/activate && uv sync  
@@ -14,12 +15,12 @@ conan profile detect
 inv setup  
 ```
 
-## Running
+### Run
 ```
 inv run
 ```
 
-## Conan profile
+### Conan profile
 ```
 arch=x86_64
 build_type=RelWithDebInfo

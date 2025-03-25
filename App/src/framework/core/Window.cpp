@@ -52,11 +52,11 @@ bool Window::shouldClose() const {
   return !glfwInitialized_ || glfwWindowShouldClose(window_);
 }
 
-void Window::updateEvents() const {
-  glfwPollEvents();
-  if (glfwGetKey(window_, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-    glfwSetWindowShouldClose(window_, true);
+void Window::shouldClose(bool close) const {
+  glfwSetWindowShouldClose(window_, close);
 }
+
+void Window::updateEvents() const { glfwPollEvents(); }
 
 void Window::present() const { glfwSwapBuffers(window_); }
 
