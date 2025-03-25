@@ -1,9 +1,9 @@
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 
+#include "ExampleGUI.h"
 #include "framework/core/App.h"
 #include "framework/graphics/Graphics.h"
-#include "framework/gui/GUI.h"
 
 using namespace framework;
 class MyApp : public App {
@@ -17,6 +17,7 @@ class MyApp : public App {
   }
 
   virtual void handleInput() override {
+    // TODO: Implement an input abstraction
     if (glfwGetKey(window_.getNativeHandle(), GLFW_KEY_ESCAPE) == GLFW_PRESS) {
       window_.shouldClose(true);
     }
@@ -24,11 +25,12 @@ class MyApp : public App {
 
   virtual void render(float interp) const override {
     graphics::clearColor();
-    gui_.render(this);
+    gui_.render();
+    graphics::checkErrors();
   }
 
  private:
-  GUI gui_;
+  ExampleGUI gui_;
 };
 
 int main(int argc, char **argv) {

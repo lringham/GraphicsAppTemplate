@@ -22,8 +22,8 @@ set(SOURCES
         App/src/framework/core/App.cpp
         App/src/framework/core/Window.cpp
         App/src/framework/graphics/Graphics.cpp
-        App/src/framework/gui/GUI.cpp
-        App/src/framework/utils/Log.cpp)
+        App/src/framework/utils/Log.cpp
+        App/src/ExampleGUI.cpp)
 
 set(IMGUI_SOURCES
         build/conan/imgui/imgui_impl_glfw.cpp

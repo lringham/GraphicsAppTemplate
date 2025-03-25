@@ -2,33 +2,27 @@
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
 
-#include "framework/core/App.h"
-#include "framework/gui/GUI.h"
+#include "ExampleGUI.h"
 
-#define GLFW_INCLUDE_NONE
-#include <GLFW/glfw3.h>
-
-using namespace framework;
-
-void GUI::initialize(GLFWwindow* windowPtr) {
+void ExampleGUI::initialize(GLFWwindow* windowPtr) {
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
   ImGuiIO& io = ImGui::GetIO();
   (void)io;
-  io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;  // Enable
+  io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
   ImGui::StyleColorsDark();
 
   ImGui_ImplGlfw_InitForOpenGL(windowPtr, true);
   ImGui_ImplOpenGL3_Init("#version 150");
 }
 
-GUI::~GUI() {
+ExampleGUI::~ExampleGUI() {
   ImGui_ImplOpenGL3_Shutdown();
   ImGui_ImplGlfw_Shutdown();
   ImGui::DestroyContext();
 }
 
-void GUI::render(const App* app) const {
+void ExampleGUI::render() const {
   ImGui_ImplOpenGL3_NewFrame();
   ImGui_ImplGlfw_NewFrame();
 
@@ -40,5 +34,3 @@ void GUI::render(const App* app) const {
 
   ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
-
-void GUI::handleEvents() {}
