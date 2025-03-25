@@ -4,7 +4,7 @@
 #include "framework/graphics/OpenGL.h"
 #include "framework/utils/Log.h"
 
-namespace Graphics {
+namespace framework::graphics {
 bool checkErrors() {
   bool hasError = false;
   std::string errorMessage = "";
@@ -39,7 +39,7 @@ bool checkErrors() {
         errorMessage += "Unknown error";
         break;
     }
-    Log::error(errorMessage);
+    framework::Log::error(errorMessage);
   }
   return hasError;
 }
@@ -76,4 +76,4 @@ void clearDepth() { glClear(GL_DEPTH_BUFFER_BIT); }
 void setViewport(int x, int y, int width, int height) {
   glViewport(x, y, width, height);
 }
-}  // namespace Graphics
+}  // namespace framework::graphics

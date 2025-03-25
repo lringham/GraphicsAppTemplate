@@ -2,12 +2,12 @@
 
 #include "framework/utils/Log.h"
 
-namespace Log {
+namespace framework {
 
-void info(std::string_view msg) { spdlog::info(msg); }
+void Log::info(std::string_view msg) { spdlog::info(msg); }
 
-void warning(std::string_view msg) { spdlog::warn(msg); }
+void Log::warning(std::string_view msg) { spdlog::warn(msg); }
 
-void error(std::string_view msg) { spdlog::error(msg); }
+void Log::error(std::string_view msg) { spdlog::error(msg); }
 
-}  // namespace Log
+}  // namespace framework

@@ -4,6 +4,7 @@
 #include "framework/utils/Cast.h"
 
 using namespace framework;
+
 App::App(int width, int height, std::string_view windowTitle)
     : window_(width, height, windowTitle) {}
 

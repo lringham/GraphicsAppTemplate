@@ -1,0 +1,7 @@
+.venv/
+.cache/
+build/
+uv.lock
+imgui.ini
+CMakeUserPresets.json
+compile_commands.json

@@ -8,6 +8,8 @@
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 
+using namespace framework;
+
 void GUI::initialize(GLFWwindow* windowPtr) {
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();

@@ -1,6 +1,9 @@
 #pragma once
+#include <string_view>
+
 #include "framework/core/Window.h"
 
+namespace framework {
 class App {
  public:
   App(int width, int height, std::string_view windowTitle);
@@ -24,3 +27,4 @@ class App {
   void doRender(float interp) const;
   int doShutdown();
 };
+}  // namespace framework

@@ -1,7 +1,7 @@
 #pragma once
 #include <type_traits>
 
-namespace Graphics {
+namespace framework::graphics {
 bool checkErrors();
 void setDepthTesting(bool state);
 void setFaceCulling(bool state);
@@ -33,5 +33,4 @@ static DataType dataTypeEnum() {
 
   return DataType::None;
 }
-
-}  // namespace Graphics
+}  // namespace framework::graphics
