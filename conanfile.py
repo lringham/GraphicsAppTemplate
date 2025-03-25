@@ -10,11 +10,7 @@ class CompressorRecipe(ConanFile):
     def requirements(self):
         self.requires("glfw/3.4")
         self.requires("glad/0.1.36")
-        self.requires("stb/cci.20240213")
         self.requires("imgui/cci.20230105+1.89.2.docking")
-        self.requires("tinyobjloader/2.0.0-rc10")
-        self.requires("doctest/2.4.11")
-        self.requires("magic_enum/0.9.7")
         self.requires("spdlog/1.15.1")
         
     def configure(self):
