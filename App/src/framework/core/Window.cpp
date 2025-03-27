@@ -27,13 +27,13 @@ Window::~Window() {
 
 void Window::initialize(int width, int height, const std::string_view title) {
   if (!glfwInitialized_) {
-    framework::Log::error("GLFW not initialized!\n");
+    Log::error("GLFW not initialized!\n");
     return;
   }
 
   window_ = glfwCreateWindow(width, height, title.data(), nullptr, nullptr);
   if (!window_) {
-    framework::Log::error("Failed to create window!\n");
+    Log::error("Failed to create window!\n");
     glfwTerminate();
     return;
   }
@@ -41,7 +41,7 @@ void Window::initialize(int width, int height, const std::string_view title) {
   glfwMakeContextCurrent(window_);
 
   if (!gladLoadGL()) {
-    framework::Log::error("Failed to load glad!\n");
+    Log::error("Failed to load glad!\n");
     return;
   }
 

@@ -7,7 +7,7 @@ A basic app template based on OpenGL, Conan, CMake, and ImGUI.
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-### setup
+### Setup
 ```
 cd Workspace/App/  
 uv venv && source .venv/bin/activate && uv sync  
