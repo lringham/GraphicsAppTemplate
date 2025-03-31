@@ -1,5 +1,5 @@
 from invoke import task
-import os
+import os, sys
 
 DEFAULT_BUILD_MODE = "RelWithDebInfo"
 APP_NAME = "app"
@@ -23,23 +23,35 @@ def build(c, build_mode=DEFAULT_BUILD_MODE):
 @task
 def launch(c, build_mode=DEFAULT_BUILD_MODE):
     "Launch the application."
-    c.run(f"./{BUILD_DIR}/{build_mode}/{APP_NAME}")
+    if (sys.platform == "win32" ):
+        c.run(f"{BUILD_DIR}\\{build_mode}\\{build_mode}\\{APP_NAME}.exe")
+    else:
+        c.run(f"./{BUILD_DIR}/{build_mode}/{APP_NAME}")
 
 @task
 def clean(c):
     "Clean up build artifacts."
-    c.run(f"rm -rf {BUILD_DIR} CMakeUserPresets.json compile_commands.json imgui.ini")
+    c.run(f"rm -rf {BUILD_DIR} conan CMakeUserPresets.json compile_commands.json")
 
-@task(pre=[config, build])
+@task
 def run(c, build_mode=DEFAULT_BUILD_MODE):
     "Run the application after configuring and building."
+    
+    config(c, build_mode)
+    build(c, build_mode)
     launch(c, build_mode)
 
-@task(pre=[deps, config, build])
+@task
 def setup(c, build_mode=DEFAULT_BUILD_MODE):
     "Setup the project: install dependencies, configure, and build."
-    compile_commands_path = f"{BUILD_DIR}/{build_mode}/compile_commands.json"
-    if os.path.exists(compile_commands_path):
-        if os.path.exists("compile_commands.json") or os.path.islink("compile_commands.json"):
-            os.remove("compile_commands.json")
-        os.symlink(compile_commands_path, "compile_commands.json")
+    
+    deps(c, build_mode)
+    config(c, build_mode)
+    build(c, build_mode)
+
+    if (sys.platform == "linux" ):
+        compile_commands_path = f"{BUILD_DIR}/{build_mode}/compile_commands.json"
+        if os.path.exists(compile_commands_path):
+            if os.path.exists("compile_commands.json") or os.path.islink("compile_commands.json"):
+                os.remove("compile_commands.json")
+            os.symlink(compile_commands_path, "compile_commands.json")
