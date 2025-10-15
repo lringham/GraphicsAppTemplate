@@ -5,7 +5,7 @@ description = "A graphics app template"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
-    "conan>=2.12.2,<3",
+    "conan>=2.21.0,<3",
     "invoke>=2.2.0",
     "cmake>=3.31.6",
     "ninja>=1.11.1.3"
