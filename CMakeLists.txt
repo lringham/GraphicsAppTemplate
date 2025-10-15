@@ -18,8 +18,8 @@ find_package(imgui REQUIRED)
 find_package(spdlog REQUIRED)
 
 set(IMGUI_SOURCES
-    build/conan/imgui/imgui_impl_glfw.cpp
-    build/conan/imgui/imgui_impl_opengl3.cpp
+    App/thirdparty/imgui/imgui_impl_glfw.cpp
+    App/thirdparty/imgui/imgui_impl_opengl3.cpp
 )
 
 add_executable(app ${IMGUI_SOURCES})
@@ -36,7 +36,7 @@ target_sources(app PRIVATE
 
 target_link_libraries(app PRIVATE glad::glad glfw imgui::imgui spdlog::spdlog)
 
-target_include_directories(app PRIVATE App/include build/conan/imgui/include)
+target_include_directories(app PRIVATE App/include App/thirdparty/imgui/include)
 
 if (BUILD_TESTS)
     add_subdirectory(tests)

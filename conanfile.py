@@ -6,6 +6,12 @@ import inspect, json, pickle, base64
 class CompressorRecipe(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     generators = "CMakeToolchain", "CMakeDeps"
+    options = {
+        "copy_imgui_deps": [True, False]
+    }
+    default_options = {
+        "copy_imgui_deps": False
+    }
 
     def requirements(self):
         self.requires("glfw/3.4")
@@ -26,10 +32,11 @@ class CompressorRecipe(ConanFile):
         self.tool_requires("cmake/3.22.6")
 
     def generate(self):
-        src = self.dependencies["imgui"].cpp_info.srcdirs[0]
-        copy(self, "*imgui_impl_glfw.cpp", src, dst="imgui")
-        copy(self, "*imgui_impl_glfw.h", src, dst="imgui/include")
-        copy(self, "*imgui_impl_opengl3.cpp", src, dst="imgui")
-        copy(self, "*imgui_impl_opengl3.h", src, dst="imgui/include")
-        copy(self, "*imgui_impl_opengl3_loader.h", src, dst="imgui/include")
-
+        if self.options.copy_imgui_deps:
+            src = self.dependencies["imgui"].cpp_info.srcdirs[0]
+            thirdparty_path = os.path.join(self.folders.base_source, "App/thirdparty/imgui")
+            copy(self, "*imgui_impl_glfw.cpp", src, dst=f"{thirdparty_path}")
+            copy(self, "*imgui_impl_glfw.h", src, dst=f"{thirdparty_path}/include")
+            copy(self, "*imgui_impl_opengl3.cpp", src, dst=f"{thirdparty_path}")
+            copy(self, "*imgui_impl_opengl3.h", src, dst=f"{thirdparty_path}/include")
+            copy(self, "*imgui_impl_opengl3_loader.h", src, dst=f"{thirdparty_path}/include")
