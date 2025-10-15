@@ -12,6 +12,7 @@ class CompressorRecipe(ConanFile):
         self.requires("glad/0.1.36")
         self.requires("imgui/cci.20230105+1.89.2.docking")
         self.requires("spdlog/1.15.1")
+        self.requires("doctest/2.4.12")
         
     def configure(self):
         self.options['glad'].shared = False

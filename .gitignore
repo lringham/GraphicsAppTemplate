@@ -1,6 +1,7 @@
 .venv/
 .cache/
 build/
+CMakeFiles/
 uv.lock
 imgui.ini
 CMakeUserPresets.json

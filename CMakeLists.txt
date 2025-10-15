@@ -9,6 +9,7 @@ message(" ** CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(BUILD_TESTS ON)
 
 find_package(OpenGL REQUIRED)
 find_package(glfw3 REQUIRED)
@@ -36,3 +37,7 @@ target_sources(app PRIVATE
 target_link_libraries(app PRIVATE glad::glad glfw imgui::imgui spdlog::spdlog)
 
 target_include_directories(app PRIVATE App/include build/conan/imgui/include)
+
+if (BUILD_TESTS)
+    add_subdirectory(tests)
+endif()

@@ -34,9 +34,16 @@ def clean(c):
     c.run(f"rm -rf {BUILD_DIR} conan CMakeUserPresets.json compile_commands.json")
 
 @task
+def test(c, build_mode=DEFAULT_BUILD_MODE):
+    "Run the tests."
+    if (sys.platform == "win32" ):
+        c.run(f"ctest --test-dir .\\{BUILD_DIR}\\{build_mode}\\tests")
+    else:
+        c.run(f"ctest --test-dir ./{BUILD_DIR}/{build_mode}/tests")
+
+@task
 def run(c, build_mode=DEFAULT_BUILD_MODE):
     "Run the application after configuring and building."
-    
     config(c, build_mode)
     build(c, build_mode)
     launch(c, build_mode)
@@ -44,7 +51,6 @@ def run(c, build_mode=DEFAULT_BUILD_MODE):
 @task
 def setup(c, build_mode=DEFAULT_BUILD_MODE):
     "Setup the project: install dependencies, configure, and build."
-    
     deps(c, build_mode)
     config(c, build_mode)
     build(c, build_mode)
