@@ -15,4 +15,5 @@ The project is setup to use `Conan` and `UV` for dependency management but the C
    git clone https://github.com/lringham/GraphicsAppTemplate.git
    cd GraphicsAppTemplate
    ```
+2. Run `uv venv && source .venv/bin/activate && uv sync`
 2. Run `inv setup launch`
