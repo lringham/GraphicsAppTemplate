@@ -7,22 +7,22 @@ BUILD_DIR = "build"
 
 @task
 def deps(c, build_mode=DEFAULT_BUILD_MODE):
-    "Install dependencies using Conan."
-    c.run(f"conan install . --build=missing -of={BUILD_DIR}/conan --settings=build_type={build_mode}")
+    """Install dependencies using Conan."""
+    c.run(f"conan install . -b missing -of {BUILD_DIR}/conan --settings build_type={build_mode} -pr:a scripts/conan_profile.txt")
 
 @task
 def config(c, build_mode=DEFAULT_BUILD_MODE):
-    "Configure the project using CMake."
+    """Configure the project using CMake."""
     c.run(f"cmake --preset {build_mode}")
 
 @task
 def build(c, build_mode=DEFAULT_BUILD_MODE):
-    "Build the project using CMake."
+    """Build the project using CMake."""
     c.run(f"cmake --build --preset={build_mode}")
 
 @task
 def launch(c, build_mode=DEFAULT_BUILD_MODE):
-    "Launch the application."
+    """Launch the application."""
     if (sys.platform == "win32" ):
         c.run(f"{BUILD_DIR}\\{build_mode}\\{build_mode}\\{APP_NAME}.exe")
     else:
@@ -30,12 +30,12 @@ def launch(c, build_mode=DEFAULT_BUILD_MODE):
 
 @task
 def clean(c):
-    "Clean up build artifacts."
+    """Clean up build artifacts."""
     c.run(f"rm -rf {BUILD_DIR} conan CMakeUserPresets.json compile_commands.json")
 
 @task
 def test(c, build_mode=DEFAULT_BUILD_MODE):
-    "Run the tests."
+    """Run the tests."""
     if (sys.platform == "win32" ):
         c.run(f"ctest --test-dir .\\{BUILD_DIR}\\{build_mode}\\tests")
     else:
@@ -43,14 +43,14 @@ def test(c, build_mode=DEFAULT_BUILD_MODE):
 
 @task
 def run(c, build_mode=DEFAULT_BUILD_MODE):
-    "Run the application after configuring and building."
+    """Run the application after configuring and building."""
     config(c, build_mode)
     build(c, build_mode)
     launch(c, build_mode)
 
 @task
 def setup(c, build_mode=DEFAULT_BUILD_MODE):
-    "Setup the project: install dependencies, configure, and build."
+    """Setup the project: install dependencies, configure, and build."""
     deps(c, build_mode)
     config(c, build_mode)
     build(c, build_mode)
