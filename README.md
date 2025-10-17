@@ -39,7 +39,7 @@ The project uses `Conan` and optionally `UV` for dependency management, but the 
    git clone https://github.com/lringham/GraphicsAppTemplate.git
    cd GraphicsAppTemplate
    ```
-2. (Optional) Set up Python environment for automation:
+2. Set up Python environment:
     - **On Unix/macOS:**
        ```bash
        uv venv && source .venv/bin/activate && uv sync
