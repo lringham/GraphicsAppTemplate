@@ -11,9 +11,10 @@ App::App(int width, int height, std::string_view windowTitle)
 namespace {
 int msSinceStart() {
   static auto start = std::chrono::steady_clock::now();
-  return std::chrono::duration_cast<std::chrono::milliseconds>(
+  auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(
              std::chrono::steady_clock::now() - start)
       .count();
+  return as<int>(ms);
 }
 }  // namespace
 

@@ -12,7 +12,7 @@ class MyApp : public App {
       : App(width, height, windowTitle) {}
 
   virtual void initialize() override {
-    graphics::setBackgroundColor(0.6, 0.6, 1.0, 1.0);
+    graphics::setBackgroundColor(0.6f, 0.6f, 1.f, 1.f);
     gui_.initialize(window_.getNativeHandle());
   }
 
