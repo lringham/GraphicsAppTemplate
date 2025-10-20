@@ -7,7 +7,7 @@
 
 using namespace framework;
 class MyApp : public App {
- public:
+public:
   MyApp(int width, int height, std::string_view windowTitle)
       : App(width, height, windowTitle) {}
 
@@ -17,7 +17,6 @@ class MyApp : public App {
   }
 
   virtual void handleInput() override {
-    // TODO: Implement an input abstraction
     if (glfwGetKey(window_.getNativeHandle(), GLFW_KEY_ESCAPE) == GLFW_PRESS) {
       window_.shouldClose(true);
     }
@@ -29,7 +28,7 @@ class MyApp : public App {
     graphics::checkErrors();
   }
 
- private:
+private:
   ExampleGUI gui_;
 };
 

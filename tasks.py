@@ -1,10 +1,33 @@
 from invoke import task
-import os, sys
+import os
+import sys
+import shutil
 
 DEFAULT_BUILD_MODE = "RelWithDebInfo"
+DEBUG_BUILD_MODE = "Debug"
+RELEASE_BUILD_MODE = "Release"
 APP_NAME = "app"
+APP_NAME_LOWER = APP_NAME.lower()
 BUILD_DIR = "build"
 
+############ Utils ############
+def rm(filename):
+    """Remove a file"""
+    try:
+        if os.path.exists(filename) or os.path.islink(filename):
+            os.remove(filename)
+    except:
+        pass
+
+def rm_dir(dirname):
+    """Remove a directory"""
+    try:
+        if os.path.exists(dirname):
+            shutil.rmtree(dirname)
+    except:
+        pass
+
+############ Tasks ############
 @task
 def deps(c, build_mode=DEFAULT_BUILD_MODE):
     """Install dependencies using Conan."""
@@ -23,15 +46,17 @@ def build(c, build_mode=DEFAULT_BUILD_MODE):
 @task
 def launch(c, build_mode=DEFAULT_BUILD_MODE):
     """Launch the application."""
-    if (sys.platform == "win32" ):
-        c.run(f"{BUILD_DIR}\\{build_mode}\\{build_mode}\\{APP_NAME}.exe")
+    if (sys.platform == "win32"):
+        c.run(f"{BUILD_DIR}\\{build_mode}\\{APP_NAME}\\{APP_NAME_LOWER}.exe")
     else:
-        c.run(f"./{BUILD_DIR}/{build_mode}/{APP_NAME}")
+        c.run(f"./{BUILD_DIR}/{build_mode}/{APP_NAME_LOWER}")
 
 @task
 def clean(c):
     """Clean up build artifacts."""
-    c.run(f"rm -rf {BUILD_DIR} conan CMakeUserPresets.json compile_commands.json")
+    rm_dir(BUILD_DIR)
+    for file in ["conan", "CMakeUserPresets.json"]:
+        rm(file)
 
 @task
 def test(c, build_mode=DEFAULT_BUILD_MODE):
