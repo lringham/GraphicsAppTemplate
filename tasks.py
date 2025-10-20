@@ -47,7 +47,7 @@ def build(c, build_mode=DEFAULT_BUILD_MODE):
 def launch(c, build_mode=DEFAULT_BUILD_MODE):
     """Launch the application."""
     if (sys.platform == "win32"):
-        c.run(f"{BUILD_DIR}\\{build_mode}\\{APP_NAME}\\{APP_NAME_LOWER}.exe")
+        c.run(f"{BUILD_DIR}\\{build_mode}\\{APP_NAME_LOWER}.exe")
     else:
         c.run(f"./{BUILD_DIR}/{build_mode}/{APP_NAME_LOWER}")
 
