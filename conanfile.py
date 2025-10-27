@@ -1,11 +1,12 @@
 from conan import ConanFile
+from conan.tools.cmake import CMakeToolchain
 from conan.tools.files import copy
 import os
 import inspect, json, pickle, base64
 
 class CompressorRecipe(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
-    generators = "CMakeToolchain", "CMakeDeps"
+    generators = "CMakeDeps"
     options = {
         "copy_imgui_deps": [True, False]
     }
@@ -40,3 +41,7 @@ class CompressorRecipe(ConanFile):
             copy(self, "*imgui_impl_opengl3.cpp", src, dst=f"{thirdparty_path}")
             copy(self, "*imgui_impl_opengl3.h", src, dst=f"{thirdparty_path}/include")
             copy(self, "*imgui_impl_opengl3_loader.h", src, dst=f"{thirdparty_path}/include")
+
+        tc = CMakeToolchain(self)
+        tc.user_presets_path = False  # Disable CMakeUserPresets.json generation
+        tc.generate()

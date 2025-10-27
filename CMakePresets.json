@@ -9,9 +9,10 @@
     {
       "name": "conan",
       "hidden": true,
-      "cacheVariables": {
-        "CMAKE_POLICY_DEFAULT_CMP0091": "NEW"
-      },
+        "cacheVariables": {
+            "CMAKE_POLICY_DEFAULT_CMP0091": "NEW",
+            "CMAKE_POLICY_DEFAULT_CMP0092": "NEW"
+        },
       "toolchainFile": "build/conan/conan_toolchain.cmake"
     },
     {
